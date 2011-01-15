@@ -20,6 +20,8 @@ build: support/cell/build/cell.js $(src_files)
 	coffee -b -o build/ -c src/
 
 support/cell/build/cell.js:
+	git submodule init
+	git submodule update
 	cd support/cell; make
 
 clean: 
