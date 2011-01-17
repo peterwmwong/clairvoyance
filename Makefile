@@ -7,9 +7,8 @@ endef
 #-------------------------------------------------------------------
 # Convenience
 #------------------------------------------------------------------- 
-.PHONY : all dev clean
+.PHONY : build dev clean
 
-all: build
 
 build: support/cell/build/cell.js $(src_files)
 	mkdir -p build
@@ -24,8 +23,13 @@ support/cell/build/cell.js:
 	git submodule update
 	cd support/cell; make
 
+
+dev: support/express/support/connect/index.js
+	coffee test/util/dev-server.coffee
+
+support/express/support/connect/index.js:
+	cd support/express; git submodule init; git submodule update
+
+
 clean: 
 	@@rm -rf build
-
-dev:
-
